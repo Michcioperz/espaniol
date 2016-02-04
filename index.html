@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.1/holder.min.js"></script>
+    <title>Espaniol is cute</title>
+    <style>
+      .card-reveal .row {
+        position: fixed;
+        bottom: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav class="amber">
+        <div class="navbar-wrapper">
+          <a class="brand-logo center">Espanioler</a>
+        </div>
+      </nav>
+    </div>
+    <div class="container" style="padding-top:40px"></div>
+    <script src="questions.js"></script>
+    <script type="text/javascript">
+      var question, toss;
+      function newQuestion() {
+        $(".offset-m3").addClass("oldcard");
+        question = questions[Math.floor(Math.random()*questions.length)];
+        toss = Math.round(Math.random());
+        $("<div></div>").addClass("row").append($("<div></div>").addClass("col s12 m6 offset-m3").append($("<div></div>").addClass("card small").append($("<div></div>").addClass("card-image").append($("<img>").addClass("megaimage responsive-img").attr("data-src","holder.js/500x200?"+$.param({random:"yes",outline:"no",text:question[toss],size:50})))).append($("<div></div>").addClass("card-content").append($("<span></span>").addClass("card-title megaquestion").text(question[toss])).append($("<div></div>").addClass("row").append($("<div></div>").addClass("col s6 center").append($("<a></a>").addClass("btn-large waves-effect waves-light activator red").text("Nie wiem"))).append($("<div></div>").addClass("col s6 center").append($("<a></a>").addClass("btn-large waves-effect waves-light activator green").text("Wiem"))))).append($("<div></div>").addClass("card-reveal").append($("<p></p>").addClass("flow-text megaquestion").text(question[toss])).append($("<p></p>").addClass("flow-text megaanswer").text(question[1-toss])).append($("<div></div>").addClass("row").append($("<div></div>").addClass("col s6 center").append($("<a></a>").addClass("btn-large waves-effect waves-light activator red replicate").text("Nie wiedziałem").click(newQuestion))).append($("<div></div>").addClass("col s6 center").append($("<a></a>").addClass("btn-large waves-effect waves-light activator green replicate").text("Wiedziałem").click(newQuestion))))))).appendTo($(".container"));
+        Holder.run({images:".megaimage"});
+        $(".oldcard").slideUp("slow",function() { $(".oldcard").parent().remove(); });
+      }
+      $(document).ready(newQuestion);
+    </script>
+  </body>
+</html>
